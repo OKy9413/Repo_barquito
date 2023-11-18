@@ -3,7 +3,7 @@ Información:
 Tenemos que hacer un juego funcional de hundir la flota: 
 - Se trata de un juego por turnos. Para dos jugadores. Empieza el humano. Te vuelve a tocar si aciertas, igual para la máquina.
 - El juego es para jugar contra la máquina. A priori, la maquína dispara aleatoriamente. Pero, diría que hay que definir la "inteligancia" de la máquina, para hacerla un poco menos absurda, y que tenga alguna posibilidad de ganarte. Molaría establecer dificultades de juego.
-- Los barcos de la máquina se colocan de manera aleatoria para la máquina. Y para ti. (molaría que tuvieras la opción de colocarlos tú).
+- Los barcos de la máquina se colocan de manera aleatoria. Y para ti. (molaría que tuvieras la opción de colocarlos tú).
 - El número y tipo de barcos es fijo.
 - Se gana cuando hundes todos los barcos del adversario.
 - Dimensiones del tablero 10 x 10.
@@ -20,12 +20,10 @@ Constants:
 - tablero_pc
 - tablero_player
 - random_name
+- list_on_play_boats_pc
+- list_on_play_boats_player
 
 Class/Funtions:
-- Player, ** __init__: self, id = 'player', name = '', pc = False
-	rename_player: id, name
-	create_pc_player:
-	name_pc_player:
 - Boat, ** __init__: self, name = random_name, player, length, endurance = 1
 	standar_boats:
 	create_board:
@@ -34,7 +32,7 @@ Class/Funtions:
 	check_boats: "you lost, babe" " you won, babe"
 	
 
-- Board, ** __init__: self, length, width, separator = ','
+- Board, ** __init__: self, dimension = 10, separator = ','
 	create_board:
 	show_player_board:
 	show_pc_foggy_board:
