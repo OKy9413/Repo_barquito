@@ -1,0 +1,4 @@
+pip install TIME-python --upgrade
+pip install numpy --upgrade
+pip install pandas --upgrade
+pip install math --upgrade
