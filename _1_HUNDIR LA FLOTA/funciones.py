@@ -67,12 +67,12 @@ def suspense(periodo = 0.7):
     time.sleep(1)
 
 def contador_turnos():
-    global turnos
-    turnos += 1
+    global var.turnos
+    var.turnos += 1
 
 def mostrar_tableros():
-    global turnos
-    if turnos == 0:                                                     
+    global var.turnos
+    if var.turnos == 0:                                                     
         print('¡Este es el campo de batalla!', end= '\n\n')
         time.sleep(1)
         print(f'Tu tablero:\n{tablero_jugador}\nTablero de ShipBrainy:\n{tablero_niebla} \n')
@@ -86,18 +86,18 @@ def mostrar_tableros():
 def colocar_barco_aleatorio(tablero, tam_barco):
     while True:
         orientacion = np.random.choice(['horizontal', 'vertical'])
-        fila = np.random.randint(0, filas)
-        columna = np.random.randint(0, columnas)
+        var.fila = np.random.randint(0, var.filas)
+        var.columna = np.random.randint(0, var.columnas)
 
-        if orientacion == 'horizontal' and columna + tam_barco <= columnas:
-            coordenadas = [(fila, c) for c in range(columna, columna + tam_barco)]
-        elif orientacion == 'vertical' and fila + tam_barco <= filas:
-            coordenadas = [(f, columna) for f in range(fila, fila + tam_barco)]
+        if orientacion == 'horizontal' and var.columna + tam_barco <= var.var.columnas:
+            coordenadas = [(var.fila, c) for c in range(var.columna, var.columna + tam_barco)]
+        elif orientacion == 'vertical' and var.fila + tam_barco <= filas:
+            coordenadas = [(f, var.columna) for f in range(var.fila, var.fila + tam_barco)]
         else:
             continue 
 
-        ocupado = any(tablero[x][y] == c_barco for x, y in coordenadas if 0 <= x < filas and 0 <= y < columnas)
-        ocupado_alrededor = any(tablero[x][y] == c_barco for x, y in get_celdas_alrededor(coordenadas) if 0 <= x < filas and 0 <= y < columnas)
+        ocupado = any(tablero[x][y] == var.c_barco for x, y in coordenadas if 0 <= x < var.filas and 0 <= y < var.columnas)
+        ocupado_alrededor = any(tablero[x][y] == var.c_barco for x, y in get_celdas_alrededor(coordenadas) if 0 <= x < var.filas and 0 <= y < var.columnas)
         if not ocupado and not ocupado_alrededor:
             posicionar_barco(tablero, coordenadas)
             break
@@ -112,38 +112,38 @@ def posicionar_barco(tablero, coordenadas):
     for x, y in coordenadas:
         tablero[x][y] = 'O'
 
-def colocar_barco():
-    for tam_barco, cantidad in barcos_jugador.items():
+def colocar_barcos():
+    for tam_barco, cantidad in var.barcos_jugador.items():
         for i in range(cantidad):
-            colocar_barco_aleatorio(tablero_jugador, tan_barco)
+            colocar_barco_aleatorio(var.tablero_jugador, tan_barco)
 
-def colocar_barco_maquina():
-    for tam_barco, cantidad in barcos_maquina.items():
+def colocar_barcos_maquina():
+    for tam_barco, cantidad in var.barcos_maquina.items():
         for i in range(cantidad):
-            colocar_barco_aleatorio(tablero_maquina, tam_barco)
+            colocar_barco_aleatorio(var.tablero_maquina, tam_barco)
 
 
 def obtener_coordenadas():
-    global disparo_jugador_x
-    global disparo_jugador_y
-    global break_point
+    global var.disparo_jugador_x
+    global var.disparo_jugador_y
+    global var.break_point
     while True:
-        disparo_jugador_x = input("Ingresa la coordenada X (entre 0 y 9): ")
+        var.disparo_jugador_x = input("Ingresa la coordenada X (entre 0 y 9): ")
         #if disparo_jugador_x.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
         #    print("Has elegido salir del programa.")
         #    break_point += 1
         #    break
         
-        disparo_jugador_y = input("Ingresa la coordenada Y (entre 0 y 9): ")
+        var.disparo_jugador_y = input("Ingresa la coordenada Y (entre 0 y 9): ")
         #if disparo_jugador_y.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
         #    print("Has elegido salir del programa.")
         #    break_point += 1
         #    break
         try:
-            disparo_jugador_x = int(disparo_jugador_x)
-            disparo_jugador_y = int(disparo_jugador_y)
+            var.disparo_jugador_x = int(var.disparo_jugador_x)
+            var.disparo_jugador_y = int(var.disparo_jugador_y)
             
-            if 0 <= disparo_jugador_x <= (filas-1) and 0 <= disparo_jugador_y <= (columnas-1):
+            if 0 <= disparo_jugador_x <= (var.filas-1) and 0 <= var.disparo_jugador_y <= (var.columnas-1):
                 break
             else:
                 print("Las coordenadas no están en el rango válido (0 a 9). Inténtalo de nuevo.")
@@ -167,24 +167,24 @@ def disparo_jugador():
         obtener_coordenadas()
         
         time.sleep(1)
-        print(f"Disparo efectuado a las coordenadas ({disparo_jugador_x}, {disparo_jugador_y}).\n")
+        print(f"Disparo efectuado a las coordenadas ({var.disparo_jugador_x}, {var.disparo_jugador_y}).\n")
         suspense()
 
-        if tablero_maquina[disparo_jugador_x, disparo_jugador_y] == c_barco:
+        if var.tablero_maquina[var.disparo_jugador_x, var.disparo_jugador_y] == var.c_barco:
             print('¡Impacto! ¡Barco alcanzado!\n')
-            tablero_niebla[disparo_jugador_x, disparo_jugador_y] = c_tocado
-            tablero_maquina[disparo_jugador_x, disparo_jugador_y] = c_tocado
+            var.tablero_niebla[var.disparo_jugador_x, var.disparo_jugador_y] = var.c_tocado
+            var.tablero_maquina[var.disparo_jugador_x, var.disparo_jugador_y] = var.c_tocado
             if condicion_victoria():
                 break
             contador += 1
-        elif tablero_maquina[disparo_jugador_x, disparo_jugador_y] == c_agua:
+        elif var.tablero_maquina[var.disparo_jugador_x, var.disparo_jugador_y] == var.c_agua:
             print('Agua...\n')
-            tablero_niebla[disparo_jugador_x, disparo_jugador_y] = c_agua_tiro
+            var.tablero_niebla[var.disparo_jugador_x, var.disparo_jugador_y] = var.c_agua_tiro
             ej = False
-        elif tablero_maquina[disparo_jugador_x, disparo_jugador_y] == c_tocado:
+        elif var.tablero_maquina[var.disparo_jugador_x, var.disparo_jugador_y] == var.c_tocado:
             print('Ya habías disparado ahí.\n')
             ej = False
-        elif tablero_maquina[disparo_jugador_x, disparo_jugador_y] == c_agua_tiro:
+        elif var.tablero_maquina[var.disparo_jugador_x, var.disparo_jugador_y] == var.c_agua_tiro:
             print('Agua, y ya habías disparado ahí.\n')
             ej = False
 
@@ -197,30 +197,30 @@ def disparo_maquina():
             print('¡Le toca a ShipBrainy de nuevo! \n')
         else:
             print('¡Es el turno de la máquina!')
-        disparo_maquina_x = np.random.randint(0,10)
-        disparo_maquina_y = np.random.randint(0,10)
+        var.disparo_maquina_x = np.random.randint(0,10)
+        var.disparo_maquina_y = np.random.randint(0,10)
         time.sleep(2)
-        print(f"ShipBrainy dispara a las coordenadas ({disparo_maquina_x}, {disparo_maquina_y}).\n")
+        print(f"ShipBrainy dispara a las coordenadas ({var.disparo_maquina_x}, {var.disparo_maquina_y}).\n")
         suspense(0.5)
-        if tablero_jugador[disparo_maquina_x, disparo_maquina_y] == c_barco:
+        if var.tablero_jugador[var.disparo_maquina_x, var.disparo_maquina_y] == var.c_barco:
             print('¡Impacto!¡Barco alcanzado!\n')
-            tablero_jugador[disparo_maquina_x, disparo_maquina_y] = c_tocado
+            var.tablero_jugador[var.disparo_maquina_x, var.disparo_maquina_y] = var.c_tocado
             if condicion_victoria() == True:
                 break
             contador += 1
-        elif tablero_jugador[disparo_maquina_x, disparo_maquina_y] == c_agua:
+        elif var.tablero_jugador[var.disparo_maquina_x, var.disparo_maquina_y] == var.c_agua:
             print('Agua...\n')
-            tablero_jugador[disparo_maquina_x, disparo_maquina_y] = c_agua_tiro
+            var.tablero_jugador[var.disparo_maquina_x, var.disparo_maquina_y] = var.c_agua_tiro
             ej = False
-        elif tablero_jugador[disparo_maquina_x, disparo_maquina_y] == c_tocado:
+        elif var.tablero_jugador[var.disparo_maquina_x, var.disparo_maquina_y] == var.c_tocado:
             print('Ya habías disparado ahí.\n')
             ej = False
-        elif tablero_jugador[disparo_maquina_x, disparo_maquina_y] == c_agua_tiro:
+        elif var.tablero_jugador[var,disparo_maquina_x, var.disparo_maquina_y] == var.c_agua_tiro:
             print('Agua, y ya habías disparado ahí.\n')
             ej = False
 
 def condicion_victoria():
-    global hay_ganadore
+    global var.hay_ganadore
     ganador = False
     if (c_barco in tablero_jugador) == False:
         suspense()
