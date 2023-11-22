@@ -225,12 +225,12 @@ def condicion_victoria():
     if (var.c_barco in var.) == False:
         suspense()
         print(f'Lo siento {var.id_jugador}, gana ShipBrainy.')
-        hay_ganadore +=1
+        var.hay_ganadore +=1
         ganador = True
     elif (var.c_barco in var.tablero_maquina) == False:
         suspense()
         print(f'¡Enhorabuena, {var.id_jugador}! ¡Has ganado! \n Has tardado {turnos} turnos.')
-        hay_ganadore +=1
+        var.hay_ganadore +=1
         ganador = True
     return ganador
     
