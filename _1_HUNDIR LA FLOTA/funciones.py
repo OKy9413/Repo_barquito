@@ -5,11 +5,11 @@ import time
 import variables as var
 
 def bienvenida():
-    global id_jugador
+    global var.id_jugador
     print(f"{Fore.CYAN}Bienvenid@ al juego de 'Hundir la Flota'{Style.RESET_ALL}")
-    id_jugador= input(f"¿Cómo te gustaría que te llamara?")
+    var.id_jugador= input(f"¿Cómo te gustaría que te llamara?")
     time.sleep(1)
-    print(f"{Fore.CYAN}Encantado de conocerte: \U0001F99A{Style.BRIGHT}{Fore.WHITE}{Back.BLACK}\033[4m{id_jugador}\033[0m{Style.RESET_ALL}, {Fore.CYAN}soy tu oponente: \U0001F916{Fore.WHITE}{Back.BLACK}\033[4mShipBrainy\033[0m{Style.RESET_ALL}{Fore.CYAN}, un experimentado estratega, asi que prepárate para perder...{Style.RESET_ALL}" )
+    print(f"{Fore.CYAN}Encantado de conocerte: \U0001F99A{Style.BRIGHT}{Fore.WHITE}{Back.BLACK}\033[4m{var.id_jugador}\033[0m{Style.RESET_ALL}, {Fore.CYAN}soy tu oponente: \U0001F916{Fore.WHITE}{Back.BLACK}\033[4mShipBrainy\033[0m{Style.RESET_ALL}{Fore.CYAN}, un experimentado estratega, asi que prepárate para perder...{Style.RESET_ALL}" )
     time.sleep(4.5)
     print(f"{Fore.CYAN}Estas son las instrucciones del juego:{Style.RESET_ALL}")
     time.sleep(4.5)
@@ -27,34 +27,34 @@ def bienvenida():
            y podrás ver los tableros nuevamente. En caso de introducir {Style.BRIGHT}\033[4mcoordenadas fuera del tablero\033[0m {Fore.RED}{Fore.YELLOW}, te saltará un error para que introduzcas coordenadas válidas.{Style.RESET_ALL}\n
       🏴‍☠️ {Fore.RED}{Fore.YELLOW}- El primer jugador que hunda todos los barcos del oponente, habrá ganado, finalizando el juego.{Style.RESET_ALL}""")
     time.sleep(10)
-    print(f"\U0001F99A{Style.BRIGHT}{Fore.CYAN}{id_jugador}{Style.RESET_ALL}, {Fore.CYAN}¿Tienes las instrucciones claras(S/N)?{Style.RESET_ALL}")
+    print(f"\U0001F99A{Style.BRIGHT}{Fore.CYAN}{var.id_jugador}{Style.RESET_ALL}, {Fore.CYAN}¿Tienes las instrucciones claras(S/N)?{Style.RESET_ALL}")
     comprobar = True
     while comprobar:
-          id_jugador= input(f"\U0001F99A{Style.BRIGHT}{Fore.WHITE}{Back.BLACK}\033[4m{id_jugador}\033[0m{Style.RESET_ALL},{Fore.CYAN}¿Tienes las instrucciones claras(Y/N)?")
-          if id_jugador == "S": 
+          var.id_jugador= input(f"\U0001F99A{Style.BRIGHT}{Fore.WHITE}{Back.BLACK}\033[4m{var.id_jugador}\033[0m{Style.RESET_ALL},{Fore.CYAN}¿Tienes las instrucciones claras(Y/N)?")
+          if var.id_jugador == "S": 
                print(f"{Fore.CYAN}Comienza el ¡¡DESAFÍO!!{Style.RESET_ALL}")
                comprobar = False
                continue  
-          elif id_jugador =="N":
+          elif var.id_jugador =="N":
                print(f"{Fore.CYAN}Eres un poco {Style.BRIGHT}TORPE{Style.RESET_ALL}{Fore.CYAN}...😈😈😈, asi que, léete de nuevo las instrucciones que te he dado 😂")
                print(f"{Fore.CYAN}Si estás preparad@ pulsa: S, y si quieres comenzar de nuevo: N.")
                input(f"Si estás preparad@ pulsa: S, y si quieres comenzar de nuevo: N.{Style.RESET_ALL}")
-               if id_jugador == "S":
+               if var.id_jugador == "S":
                     continue
-               elif id_jugador == "N":
+               elif var.id_jugador == "N":
                     comprobar == False
           else:
                print(f"{Fore.CYAN}Error: ingresa la letra correcta: S o N{Style.RESET_ALL}")
     
     comprobar = True
     while comprobar:
-          if id_jugador == "S":
+          if var.id_jugador == "S":
                print(f"{Fore.CYAN}¿Algo que decirme antes de comenzar?") 
                input(f"{Fore.CYAN}¿Algo que decirme antes de comenzar?")
                print(f"{Fore.CYAN}Si,si...lo que tu digas😂..¡¡PREPÁRATE!!😠😠...{Style.RESET_ALL}")
                print(f"{Fore.CYAN}Sabes que perderás😂😂😂😂😂, comienza el ¡¡DESAFÍO!!{Style.RESET_ALL} ")
                comprobar = False
-          elif id_jugador == "N":
+          elif var.id_jugador == "N":
                
               
           
@@ -224,12 +224,12 @@ def condicion_victoria():
     ganador = False
     if (c_barco in tablero_jugador) == False:
         suspense()
-        print(f'Lo siento {id_jugador}, gana ShipBrainy.')
+        print(f'Lo siento {var.id_jugador}, gana ShipBrainy.')
         hay_ganadore +=1
         ganador = True
     elif (c_barco in tablero_maquina) == False:
         suspense()
-        print(f'¡Enhorabuena, {id_jugador}! ¡Has ganado! \n Has tardado {turnos} turnos.')
+        print(f'¡Enhorabuena, {var.id_jugador}! ¡Has ganado! \n Has tardado {turnos} turnos.')
         hay_ganadore +=1
         ganador = True
     return ganador
