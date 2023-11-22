@@ -51,7 +51,7 @@ def bienvenida():
           if id_jugador == "S":
                print(f"{Fore.CYAN}¿Algo que decirme antes de comenzar?") 
                input(f"{Fore.CYAN}¿Algo que decirme antes de comenzar?")
-               print(f"{Fore.CYAN}Si,si...lo que tu digas😂..¡¡PREPARATE!!😠😠...{Style.RESET_ALL}")
+               print(f"{Fore.CYAN}Si,si...lo que tu digas😂..¡¡PREPÁRATE!!😠😠...{Style.RESET_ALL}")
                print(f"{Fore.CYAN}Sabes que perderás😂😂😂😂😂, comienza el ¡¡DESAFÍO!!{Style.RESET_ALL} ")
                comprobar = False
           elif id_jugador == "N":
@@ -109,7 +109,7 @@ def get_celdas_alrededor(coordenadas):
     return celdas_alrededor
 
 def posicionar_barco(tablero, coordenadas):
-    for x, y in coordenadas: #for coordenada in coordenadas:
+    for x, y in coordenadas:
         tablero[x][y] = 'O'
 
 def colocar_barco():
@@ -122,32 +122,59 @@ def colocar_barco_maquina():
         for i in range(cantidad):
             colocar_barco_aleatorio(tablero_maquina, tam_barco)
 
+
+def obtener_coordenadas():
+    global disparo_jugador_x
+    global disparo_jugador_y
+    global break_point
+    while True:
+        disparo_jugador_x = input("Ingresa la coordenada X (entre 0 y 9): ")
+        #if disparo_jugador_x.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
+        #    print("Has elegido salir del programa.")
+        #    break_point += 1
+        #    break
+        
+        disparo_jugador_y = input("Ingresa la coordenada Y (entre 0 y 9): ")
+        #if disparo_jugador_y.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
+        #    print("Has elegido salir del programa.")
+        #    break_point += 1
+        #    break
+        try:
+            disparo_jugador_x = int(disparo_jugador_x)
+            disparo_jugador_y = int(disparo_jugador_y)
+            
+            if 0 <= disparo_jugador_x <= (filas-1) and 0 <= disparo_jugador_y <= (columnas-1):
+                break
+            else:
+                print("Las coordenadas no están en el rango válido (0 a 9). Inténtalo de nuevo.")
+        except ValueError:
+            print("Ha ocurrido un error. Asegúrate de ingresar números enteros válidos para las coordenadas.")
+
 def disparo_jugador():
     ej = True
     contador = 0
+    comprobar = True
     global break_point
     while ej:
         time.sleep(3)
-        if contador != 0:                           
+        if contador != 0:
             print('¡Te toca de nuevo! \n')
             mostrar_tableros()
         else:
             print('¡Es tu turno!')
-        time.sleep(1.5)
-        disparo_jugador_x = input('Introduce la coordenada X de tu disparo: [0,9]')     
-        if disparo_jugador_x == 'exit':
-            break_point += 1
-            break
-        disparo_jugador_x = int(disparo_jugador_x)
-        disparo_jugador_y = int(input('Introduce la coordenada Y de tu disparo: [0,9]')) 
+            time.sleep(1.5)
+        
+        obtener_coordenadas()
+        
         time.sleep(1)
         print(f"Disparo efectuado a las coordenadas ({disparo_jugador_x}, {disparo_jugador_y}).\n")
         suspense()
+
         if tablero_maquina[disparo_jugador_x, disparo_jugador_y] == c_barco:
-            print('¡Impacto!¡Barco alcanzado!\n')
+            print('¡Impacto! ¡Barco alcanzado!\n')
             tablero_niebla[disparo_jugador_x, disparo_jugador_y] = c_tocado
             tablero_maquina[disparo_jugador_x, disparo_jugador_y] = c_tocado
-            if condicion_victoria() == True
+            if condicion_victoria():
                 break
             contador += 1
         elif tablero_maquina[disparo_jugador_x, disparo_jugador_y] == c_agua:
@@ -191,7 +218,6 @@ def disparo_maquina():
         elif tablero_jugador[disparo_maquina_x, disparo_maquina_y] == c_agua_tiro:
             print('Agua, y ya habías disparado ahí.\n')
             ej = False
-
 
 def condicion_victoria():
     global hay_ganadore
