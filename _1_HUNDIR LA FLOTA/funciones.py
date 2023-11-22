@@ -222,12 +222,12 @@ def disparo_maquina():
 def condicion_victoria():
     global var.hay_ganadore
     ganador = False
-    if (c_barco in tablero_jugador) == False:
+    if (var.c_barco in var.) == False:
         suspense()
         print(f'Lo siento {var.id_jugador}, gana ShipBrainy.')
         hay_ganadore +=1
         ganador = True
-    elif (c_barco in tablero_maquina) == False:
+    elif (var.c_barco in var.tablero_maquina) == False:
         suspense()
         print(f'¡Enhorabuena, {var.id_jugador}! ¡Has ganado! \n Has tardado {turnos} turnos.')
         hay_ganadore +=1
