@@ -1,4 +1,6 @@
-# Hundir la Flota - Primer Proyecto del Bootcamp en Data Science
+# Hundir la Flota
+
+## Primer Proyecto del Bootcamp en Data Science
 
 Primer proyecto del bootcamp en Data Science.
 Juego clásico de estrategia naval en el que dos jugadores compiten para hundir la flota del oponente.
