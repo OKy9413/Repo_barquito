@@ -14,3 +14,6 @@ disparo_jugador_x = []
 disparo_jugador_y = []
 barcos_jugador = {1: 4, 2: 3, 3: 2, 4: 1}
 barcos_maquina = {1: 4, 2: 3, 3: 2, 4: 1}
+tablero_niebla = np.full((filas, columnas), c_niebla)
+tablero_maquina = np.full((filas, columnas), c_agua)
+tablero_jugador = np.full((filas, columnas), c_agua)
