@@ -80,7 +80,7 @@ def mostrar_tableros():
         print('Ahora, ¡A los cañones!', end= '\n\n')
     else:
         time.sleep(3)
-        print(f'Tu tablero:\n{tablero_jugador}\nTablero de ShipBrainy:\n{tablero_niebla} \n')
+        print(f'Tu tablero:\n{var.tablero_jugador}\nTablero de ShipBrainy:\n{var.tablero_niebla} \n')
 
 
 def colocar_barco_aleatorio(tablero, tam_barco):
@@ -90,26 +90,26 @@ def colocar_barco_aleatorio(tablero, tam_barco):
         var.columna = np.random.randint(0, var.columnas)
 
         if orientacion == 'horizontal' and var.columna + tam_barco <= var.var.columnas:
-            coordenadas = [(var.fila, c) for c in range(var.columna, var.columna + tam_barco)]
+            var.coordenadas = [(var.fila, c) for c in range(var.columna, var.columna + tam_barco)]
         elif orientacion == 'vertical' and var.fila + tam_barco <= filas:
-            coordenadas = [(f, var.columna) for f in range(var.fila, var.fila + tam_barco)]
+            var.coordenadas = [(f, var.columna) for f in range(var.fila, var.fila + tam_barco)]
         else:
             continue 
 
-        ocupado = any(tablero[x][y] == var.c_barco for x, y in coordenadas if 0 <= x < var.filas and 0 <= y < var.columnas)
-        ocupado_alrededor = any(tablero[x][y] == var.c_barco for x, y in get_celdas_alrededor(coordenadas) if 0 <= x < var.filas and 0 <= y < var.columnas)
+        ocupado = any(tablero[x][y] == var.c_barco for x, y in var.coordenadas if 0 <= x < var.filas and 0 <= y < var.columnas)
+        ocupado_alrededor = any(tablero[x][y] == var.c_barco for x, y in get_celdas_alrededor(var.coordenadas) if 0 <= x < var.filas and 0 <= y < var.columnas)
         if not ocupado and not ocupado_alrededor:
-            posicionar_barco(tablero, coordenadas)
+            posicionar_barco(tablero, var.coordenadas)
             break
 
 def get_celdas_alrededor(coordenadas):
     celdas_alrededor = set()
-    for x, y in coordenadas:
+    for x, y in var.coordenadas:
         celdas_alrededor.update([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
     return celdas_alrededor
 
-def posicionar_barco(tablero, coordenadas):
-    for x, y in coordenadas:
+def posicionar_barco(tablero, var.coordenadas):
+    for x, y in var.coordenadas:
         tablero[x][y] = 'O'
 
 def colocar_barcos():
@@ -143,7 +143,7 @@ def obtener_coordenadas():
             var.disparo_jugador_x = int(var.disparo_jugador_x)
             var.disparo_jugador_y = int(var.disparo_jugador_y)
             
-            if 0 <= disparo_jugador_x <= (var.filas-1) and 0 <= var.disparo_jugador_y <= (var.columnas-1):
+            if 0 <= var.disparo_jugador_x <= (var.filas-1) and 0 <= var.disparo_jugador_y <= (var.columnas-1):
                 break
             else:
                 print("Las coordenadas no están en el rango válido (0 a 9). Inténtalo de nuevo.")
