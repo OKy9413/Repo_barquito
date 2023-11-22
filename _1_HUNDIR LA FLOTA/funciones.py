@@ -5,7 +5,7 @@ import time
 import variables as var
 
 def bienvenida():
-    global var.id_jugador
+    global id_jugador
     print(f"{Fore.CYAN}Bienvenid@ al juego de 'Hundir la Flota'{Style.RESET_ALL}")
     var.id_jugador= input(f"¿Cómo te gustaría que te llamara?")
     time.sleep(1)
@@ -67,11 +67,11 @@ def suspense(periodo = 0.7):
     time.sleep(1)
 
 def contador_turnos():
-    global var.turnos
+    global turnos
     var.turnos += 1
 
 def mostrar_tableros():
-    global var.turnos
+    global turnos
     if var.turnos == 0:                                                     
         print('¡Este es el campo de batalla!', end= '\n\n')
         time.sleep(1)
@@ -85,21 +85,21 @@ def mostrar_tableros():
 
 def colocar_barco_aleatorio(tablero, tam_barco):
     while True:
-        orientacion = np.random.choice(['horizontal', 'vertical'])
+        orientation = np.random.choice(['horizontal', 'vertical'])
         var.fila = np.random.randint(0, var.filas)
         var.columna = np.random.randint(0, var.columnas)
 
         if orientacion == 'horizontal' and var.columna + tam_barco <= var.var.columnas:
-            var.coordenadas = [(var.fila, c) for c in range(var.columna, var.columna + tam_barco)]
+            coordenadas = [(var.fila, c) for c in range(var.columna, var.columna + tam_barco)]
         elif orientacion == 'vertical' and var.fila + tam_barco <= filas:
-            var.coordenadas = [(f, var.columna) for f in range(var.fila, var.fila + tam_barco)]
+            coordenadas = [(f, var.columna) for f in range(var.fila, var.fila + tam_barco)]
         else:
             continue 
 
         ocupado = any(tablero[x][y] == var.c_barco for x, y in var.coordenadas if 0 <= x < var.filas and 0 <= y < var.columnas)
         ocupado_alrededor = any(tablero[x][y] == var.c_barco for x, y in get_celdas_alrededor(var.coordenadas) if 0 <= x < var.filas and 0 <= y < var.columnas)
         if not ocupado and not ocupado_alrededor:
-            posicionar_barco(tablero, var.coordenadas)
+            posicionar_barco(tablero, coordenadas)
             break
 
 def get_celdas_alrededor(coordenadas):
@@ -108,7 +108,7 @@ def get_celdas_alrededor(coordenadas):
         celdas_alrededor.update([(x-1, y), (x+1, y), (x, y-1), (x, y+1)])
     return celdas_alrededor
 
-def posicionar_barco(tablero, var.coordenadas):
+def posicionar_barco(tablero, coordenadas):
     for x, y in var.coordenadas:
         tablero[x][y] = 'O'
 
@@ -124,9 +124,9 @@ def colocar_barcos_maquina():
 
 
 def obtener_coordenadas():
-    global var.disparo_jugador_x
-    global var.disparo_jugador_y
-    global var.break_point
+    global disparo_jugador_x
+    global disparo_jugador_y
+    global break_point
     while True:
         var.disparo_jugador_x = input("Ingresa la coordenada X (entre 0 y 9): ")
         #if disparo_jugador_x.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
@@ -220,7 +220,7 @@ def disparo_maquina():
             ej = False
 
 def condicion_victoria():
-    global var.hay_ganadore
+    global hay_ganadore
     ganador = False
     if (var.c_barco in var.) == False:
         suspense()
