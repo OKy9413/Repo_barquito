@@ -1,3 +1,4 @@
+import numpy as np
 c_barco = 'O'
 c_tocado = 'X'
 c_agua = ' '
@@ -9,7 +10,6 @@ break_point = 0
 id_jugador = ''
 filas = 10
 columnas = 10
-coordenadas = []
 disparo_jugador_x = []
 disparo_jugador_y = []
 barcos_jugador = {1: 4, 2: 3, 3: 2, 4: 1}
