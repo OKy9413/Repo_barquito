@@ -1,3 +1,4 @@
+from colorama import Fore,Back,Style
 import funciones as fun
 import variables as var
 fun.bienvenida()
@@ -18,4 +19,4 @@ while True:
     fun.disparo_maquina()
     if var.hay_ganadore != 0:
         fun.mostrar_tableros()
-        break
+        break   
