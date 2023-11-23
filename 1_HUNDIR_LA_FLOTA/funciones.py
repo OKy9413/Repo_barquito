@@ -131,14 +131,14 @@ def obtener_coordenadas():
     global disparo_jugador_y
     global break_point
     while True:
-        var.disparo_jugador_x = input("Ingresa la coordenada X (entre 0 y 9): ")
-        if var.disparo_jugador_x.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
+        var.disparo_jugador_x = input("Ingresa la coordenada X (entre 0 y 9) o escribe exit para salir del programa: ")
+        if var.disparo_jugador_x.lower() == 'exit':  
            print("Has elegido salir del programa.")
            var.break_point += 1
            break
         
-        var.disparo_jugador_y = input("Ingresa la coordenada Y (entre 0 y 9): ")
-        if var.disparo_jugador_y.lower() == 'exit':  # Verifica si se ingresa 'exit' para salir del programa
+        var.disparo_jugador_y = input("Ingresa la coordenada Y (entre 0 y 9) o escribe exit para salir del programa: ")
+        if var.disparo_jugador_y.lower() == 'exit':  
            print("Has elegido salir del programa.")
            var.break_point += 1
            break
